@@ -1,9 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("com.google.dagger.hilt.android") version "2.44" apply false
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("com.google.dagger.hilt.android") version "2.48" apply false
 }
 
 android {
@@ -66,10 +65,10 @@ dependencies {
     //Dagger Hilt Library
     implementation("com.google.dagger:hilt-android:2.48")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
-    implementation("androidx.hilt:hilt-work:1.2.0")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+//    kapt("com.google.dagger:hilt-android-compiler:2.48")
     kapt("androidx.hilt:hilt-compiler:1.2.0")
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    /*implementation("androidx.work:work-runtime-ktx:2.9.0")*/
 
     //Retrofit Library
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
@@ -85,5 +84,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+kapt {
+    correctErrorTypes = true
 }
 

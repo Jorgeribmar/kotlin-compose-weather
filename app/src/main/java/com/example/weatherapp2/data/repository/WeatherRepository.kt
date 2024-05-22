@@ -1,5 +1,6 @@
 import com.example.weatherapp2.data.network.WeatherApiService
 import com.example.weatherapp2.model.WeatherResponse
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
 import javax.inject.Inject
 
