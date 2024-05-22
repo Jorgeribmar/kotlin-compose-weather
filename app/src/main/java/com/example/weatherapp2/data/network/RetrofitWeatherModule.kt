@@ -1,6 +1,6 @@
 package com.example.weatherapp2.data.network
 
-import WeatherRepository
+import com.example.weatherapp2.data.repository.WeatherRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,18 +13,24 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RetrofitWeatherModule {
 
+
     @Provides
     @Singleton
     fun provideRetrofitWeather(): WeatherApiService {
-        return Retrofit.Builder()
+        val t = Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(WeatherApiService::class.java)
+        return t
+
     }
 
     @Provides
     @Singleton
-    fun provideWeatherApi(weatherApi: WeatherApiService) = WeatherRepository(weatherApi)
+    fun provideWeatherRepository(weatherApi: WeatherApiService): WeatherRepository {
+        return WeatherRepository(weatherApi)
+    }
+
 
 }
