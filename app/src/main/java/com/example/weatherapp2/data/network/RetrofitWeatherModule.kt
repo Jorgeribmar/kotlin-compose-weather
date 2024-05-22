@@ -1,6 +1,7 @@
 package com.example.weatherapp2.data.network
 
 import com.example.weatherapp2.data.repository.WeatherRepository
+import com.example.weatherapp2.model.WeatherPreferencesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,8 +29,8 @@ object RetrofitWeatherModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(weatherApi: WeatherApiService): WeatherRepository {
-        return WeatherRepository(weatherApi)
+    fun provideWeatherRepository(weatherApi: WeatherApiService, weatherPreferencesDao: WeatherPreferencesDao): WeatherRepository {
+        return WeatherRepository(weatherApi, weatherPreferencesDao)
     }
 
 

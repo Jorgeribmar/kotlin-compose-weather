@@ -21,6 +21,31 @@ class WeatherViewModel @Inject constructor(
 
     private val _weatherState = MutableStateFlow<WeatherState>(WeatherState.Loading)
     val weatherState: StateFlow<WeatherState> = _weatherState
+    private val _weatherPrefState = MutableStateFlow<WeatherPrefState>(WeatherPrefState.Loading)
+    val weatherPref: StateFlow<WeatherPrefState> = _weatherPrefState
+
+    fun getWeatherPref() {
+        viewModelScope.launch {
+            try {
+                val pref = weatherRepository.getWeatherPreference()
+                _weatherPrefState.value = WeatherPrefState.Success(pref.temperatureUnit)
+            }  catch (e: Exception) {
+                _weatherPrefState.value = WeatherPrefState.Error(e.message ?: "error")
+                Log.d("WeatherViewModel", "Error fetching user preferences : ${e.message}")
+            }
+        }
+    }
+
+    fun setWeatherPref(pref: String) {
+        viewModelScope.launch {
+            try {
+                weatherRepository.saveWeatherPreference(pref)
+                _weatherPrefState.value = WeatherPrefState.Success(pref)
+            } catch (e: Exception) {
+                Log.d("WeatherViewModel", "Error setting user preferences : ${e.message}")
+            }
+        }
+    }
 
     fun fetchWeather(lat: Double, lon: Double, timezone: String, units: String) {
         viewModelScope.launch {
@@ -59,3 +84,8 @@ sealed class WeatherState {
     data class Error(val message: String) : WeatherState()
 }
 
+sealed class WeatherPrefState {
+    object Loading : WeatherPrefState()
+    data class Success(val data: String) : WeatherPrefState()
+    data class Error(val message: String) : WeatherPrefState()
+}
