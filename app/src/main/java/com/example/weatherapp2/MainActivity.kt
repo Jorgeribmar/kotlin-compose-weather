@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp2.ui.theme.WeatherApp2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherApp2Theme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    NavGraph()
+                    NavGraph(navController = rememberNavController())
                 }
             }
         }

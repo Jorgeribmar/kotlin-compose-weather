@@ -88,6 +88,8 @@ dependencies {
 
     implementation("androidx.compose.animation:animation:1.6.7")
 
+    implementation(project(":ui"))
+
     implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

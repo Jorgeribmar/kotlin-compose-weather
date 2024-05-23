@@ -10,10 +10,3 @@ data class DailyWeather(
     val temperature_2m_max: List<Double>,
     val temperature_2m_min: List<Double>,
 )
-
-data class Weather(
-    val time: String,
-    val weather_code: Int,
-    val temperature_2m_max: Double,
-    val temperature_2m_min: Double,
-)

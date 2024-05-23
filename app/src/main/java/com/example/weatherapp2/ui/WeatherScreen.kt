@@ -1,5 +1,6 @@
 import android.util.Log
 import android.widget.ToggleButton
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,15 +17,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.weatherapp2.model.Weather
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.weatherapp2.model.WeatherResponse
 import com.example.weatherapp2.viewmodel.WeatherState
 import com.example.weatherapp2.viewmodel.WeatherPrefState
 import com.example.weatherapp2.viewmodel.WeatherViewModel
+import com.google.gson.Gson
+import com.lokhate.ui.components.WeatherListItem
+import com.lokhate.ui.model.Weather
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
 fun WeatherScreen(
     viewModel: WeatherViewModel = hiltViewModel(),
+    navController: NavHostController,
     lat: Double,
     lon: Double,
     timezone: String,
@@ -81,7 +88,7 @@ fun WeatherScreen(
                             viewModel.setWeatherPref(pref)
                             viewModel.fetchWeather(lat, lon, timezone, pref)
                         }
-                        WeatherList(list = weatherList)
+                        WeatherList(navController = navController, list = weatherList)
                     }
                 }
 
@@ -111,23 +118,15 @@ fun WeatherPreferenceToggle(defaultValue: String, onSwitchChanged: (Boolean) -> 
 }
 
 @Composable
-fun WeatherList(list: List<Weather>) {
+fun WeatherList(navController: NavHostController, list: List<Weather>) {
     Column(
         modifier = Modifier.padding(top = 64.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         list.forEach {
-            WeatherListElement(it)
+            WeatherListItem(item = it, handleClick = {
+                navController.navigate("details/${Gson().toJson(it)}")
+            })
         }
-    }
-}
-
-@Composable
-fun WeatherListElement(element: Weather) {
-    Row(
-        modifier = Modifier.padding(vertical = 24.dp)
-    ) {
-        Text(text = element.time)
-        Text(text = "Min: ${element.temperature_2m_min} Max: ${element.temperature_2m_max}")
     }
 }
