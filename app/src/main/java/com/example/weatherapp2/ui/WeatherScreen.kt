@@ -15,19 +15,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.weatherapp2.R
 import com.example.weatherapp2.common.viewmodel.WeatherPrefState
 import com.example.weatherapp2.common.viewmodel.WeatherState
 import com.example.weatherapp2.common.viewmodel.WeatherViewModel
-
-import com.google.gson.Gson
 import com.example.weatherapp2.network.model.Weather
 
 @Composable
 fun WeatherScreen(
-    viewModel: WeatherViewModel = hiltViewModel(),
+    viewModel: WeatherViewModel ,
     navController: NavHostController,
     lat: Double,
     lon: Double,
