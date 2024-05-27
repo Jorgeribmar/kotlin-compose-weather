@@ -1,6 +1,6 @@
+package com.example.weatherapp2.ui
+
 import android.util.Log
-import android.widget.ToggleButton
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,21 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.weatherapp2.model.WeatherResponse
-import com.example.weatherapp2.viewmodel.WeatherState
-import com.example.weatherapp2.viewmodel.WeatherPrefState
-import com.example.weatherapp2.viewmodel.WeatherViewModel
+import com.example.weatherapp2.common.viewmodel.WeatherPrefState
+import com.example.weatherapp2.common.viewmodel.WeatherState
+import com.example.weatherapp2.common.viewmodel.WeatherViewModel
+
 import com.google.gson.Gson
-import com.lokhate.ui.components.WeatherListItem
-import com.lokhate.ui.model.Weather
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.weatherapp2.network.model.Weather
 
 @Composable
 fun WeatherScreen(

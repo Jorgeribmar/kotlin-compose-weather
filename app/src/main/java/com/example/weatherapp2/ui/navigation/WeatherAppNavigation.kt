@@ -1,14 +1,14 @@
-import android.util.Log
+package com.example.weatherapp2.ui.navigation
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp2.ui.WeatherDetails
 import com.google.gson.Gson
-import com.lokhate.ui.model.Weather
+import com.example.weatherapp2.network.model.Weather
+import com.example.weatherapp2.ui.WeatherScreen
 
 @Composable
 fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier, startDestination: String = "weather") {
@@ -20,7 +20,6 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier, st
         composable("details/{weather}") { backStackEntry ->
             val weatherString = backStackEntry.arguments?.getString("weather")
             val weather = Gson().fromJson<Weather>(weatherString, Weather::class.java)
-            // Display details for the selected date
             WeatherDetails(navController = navController, weather)
         }
     }

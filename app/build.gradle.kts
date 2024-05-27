@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
 
 }
 
@@ -65,11 +64,7 @@ kapt {
 
 dependencies {
 
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.androidx.room.compiler)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -92,7 +87,9 @@ dependencies {
     implementation(libs.androidx.animation)
     implementation(libs.gson)
     implementation(project(":ui"))
-
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
+    implementation(project(":core:common"))
     implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
