@@ -1,8 +1,11 @@
 package com.lokhate.ui.model
 
+import com.google.gson.annotations.SerializedName
+
+
 data class Weather(
     val time: String,
-    val weather_code: Int,
-    val temperature_2m_max: Double,
-    val temperature_2m_min: Double,
+    @SerializedName("weather_code") val weatherCode: Int,
+    @SerializedName("temperature_2m_max") val temperature2mMax: Double,
+    @SerializedName("temperature_2m_min") val temperature2mMin: Double
 )

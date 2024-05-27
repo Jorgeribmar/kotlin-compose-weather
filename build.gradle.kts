@@ -4,12 +4,9 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     id("com.google.dagger.hilt.android") version "2.48" apply false
     alias(libs.plugins.android.library) apply false
+    id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
 }
 
-/*buildscript {
-    dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.48")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
-    }
-}*/
+
+
 

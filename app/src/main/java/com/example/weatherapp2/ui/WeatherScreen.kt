@@ -68,9 +68,9 @@ fun WeatherScreen(
                 weatherList.add(
                     Weather(
                         time = value,
-                        weather_code = data.daily.weather_code[index],
-                        temperature_2m_max = data.daily.temperature_2m_max[index],
-                        temperature_2m_min = data.daily.temperature_2m_min[index]
+                        weatherCode = data.daily.weatherCode[index],
+                        temperature2mMax = data.daily.temperature2mMax[index],
+                        temperature2mMin = data.daily.temperature2mMin[index]
                     )
                 )
             }

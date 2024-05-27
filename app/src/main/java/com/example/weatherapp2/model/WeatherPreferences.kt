@@ -3,10 +3,8 @@ package com.example.weatherapp2.model
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Entity
-import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
-import androidx.room.Update
 
 @Entity(tableName = "weather_preferences")
 data class WeatherPreferences(

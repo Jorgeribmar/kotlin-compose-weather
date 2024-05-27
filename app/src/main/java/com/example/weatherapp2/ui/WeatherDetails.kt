@@ -26,8 +26,8 @@ fun WeatherDetails(navController: NavController, weather: Weather, modifier: Mod
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = weather.time, fontSize = 32.sp, textAlign = TextAlign.Center)
-        Text(text = "Weather code: ${weather.weather_code}")
-        Text(text = "Temperature : min: ${weather.temperature_2m_min} - max: ${weather.temperature_2m_max}", modifier = Modifier.padding(bottom = 32.dp))
+        Text(text = "Weather code: ${weather.weatherCode}")
+        Text(text = "Temperature : min: ${weather.temperature2mMin} - max: ${weather.temperature2mMax}", modifier = Modifier.padding(bottom = 32.dp))
         Button(onClick = { navController.navigateUp() }) {
             Text(text = "Go back")
         }

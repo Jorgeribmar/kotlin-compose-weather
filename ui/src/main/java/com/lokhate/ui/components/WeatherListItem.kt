@@ -19,6 +19,6 @@ fun WeatherListItem(item: Weather, handleClick: (Weather) -> Unit, modifier: Mod
             }
     ) {
         Text(text = item.time)
-        Text(text = "Min: ${item.temperature_2m_min} Max: ${item.temperature_2m_max}")
+        Text(text = "Min: ${item.temperature2mMin} Max: ${item.temperature2mMax}")
     }
 }
