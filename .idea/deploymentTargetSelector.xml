@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-05-23T07:00:23.213735Z">
+        <DropdownSelection timestamp="2024-05-27T14:48:42.881824Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/mickael/.android/avd/Pixel_4_API_30.avd" />
@@ -13,10 +13,10 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="core.network">
+      <SelectionState runConfigName="core.database">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="core.database">
+      <SelectionState runConfigName="core.network">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="core.common">

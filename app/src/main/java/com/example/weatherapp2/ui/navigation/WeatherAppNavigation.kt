@@ -11,16 +11,15 @@ import com.example.weatherapp2.network.model.Weather
 import com.example.weatherapp2.ui.WeatherScreen
 
 @Composable
-fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier, startDestination: String = "weather") {
+fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier, startDestination: String = Screen.WeatherList.route) {
 
     NavHost(navController = navController, startDestination = startDestination) {
-        composable("weather") {
+        composable(Screen.WeatherList.route) {
             WeatherScreen(navController = navController, lat = 52.52, lon = 13.41, timezone = "Europe/Paris", units = "fahrenheit" )
         }
-        composable("details/{weather}") { backStackEntry ->
-            val weatherString = backStackEntry.arguments?.getString("weather")
-            val weather = Gson().fromJson<Weather>(weatherString, Weather::class.java)
-            WeatherDetails(navController = navController, weather)
+        composable(Screen.WeatherDetail.route) { backStackEntry ->
+            val weatherId = backStackEntry.arguments?.getString("weatherId") ?: "0"
+            WeatherDetails(navController = navController, weatherId)
         }
     }
 }

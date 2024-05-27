@@ -13,9 +13,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.weatherapp2.R
 import com.example.weatherapp2.common.viewmodel.WeatherPrefState
 import com.example.weatherapp2.common.viewmodel.WeatherState
 import com.example.weatherapp2.common.viewmodel.WeatherViewModel
@@ -87,7 +89,7 @@ fun WeatherScreen(
                     }
                 }
 
-                else -> Text(text = "Error getting data")
+                else -> Text(text = stringResource(R.string.error_getting_data))
             }
             println(data)
         }
@@ -118,9 +120,9 @@ fun WeatherList(navController: NavHostController, list: List<Weather>) {
         modifier = Modifier.padding(top = 64.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        list.forEach {
-            WeatherListItem(item = it, handleClick = {
-                navController.navigate("details/${Gson().toJson(it)}")
+        list.forEachIndexed { index, weather ->
+            WeatherListItem(item = weather, handleClick = {
+                navController.navigate("details/${index}")
             })
         }
     }

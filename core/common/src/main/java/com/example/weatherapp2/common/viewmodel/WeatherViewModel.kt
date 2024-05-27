@@ -1,15 +1,20 @@
 package com.example.weatherapp2.common.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp2.database.repository.WeatherDatabaseRepository
+import com.example.weatherapp2.network.model.Weather
 import com.example.weatherapp2.network.model.WeatherResponse
 import com.example.weatherapp2.network.repository.WeatherNetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,6 +30,8 @@ class WeatherViewModel @Inject constructor(
     val weatherState: StateFlow<WeatherState> = _weatherState
     private val _weatherPrefState = MutableStateFlow<WeatherPrefState>(WeatherPrefState.Loading)
     val weatherPref: StateFlow<WeatherPrefState> = _weatherPrefState
+    private val _weatherList = MutableStateFlow<List<Weather>>(emptyList())
+    val weatherList: StateFlow<List<Weather>> = _weatherList
 
     fun getWeatherPref() {
         viewModelScope.launch {
@@ -52,25 +59,16 @@ class WeatherViewModel @Inject constructor(
     fun fetchWeather(lat: Double, lon: Double, timezone: String, units: String) {
         viewModelScope.launch {
             try {
-                weatherNetworkRepository.getWeatherDataForecast(lat, lon, timezone, units).enqueue(object: Callback<WeatherResponse> {
-                    override fun onResponse(
-                        call: Call<WeatherResponse>,
-                        response: Response<WeatherResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            val body = response.body()
-                            if (body != null) {
-                                _weatherState.value = WeatherState.Success(body)
-                            }
-                        } else {
-                            Log.d("WeatherViewModel", "Error fetching data")
-                        }
-                    }
-
-                    override fun onFailure(p0: Call<WeatherResponse>, p1: Throwable) {
-                        Log.d("WeatherViewModel", "Error fetching data ${p1.message}")
-                    }
-                })
+                val response =
+                    weatherNetworkRepository.getWeatherDataForecast(lat, lon, timezone, units)
+                _weatherState.value = WeatherState.Success(response)
+                val list: MutableList<Weather> = mutableListOf()
+                response.daily.time.forEachIndexed { index, value ->
+                    list.add(Weather(time = value, weatherCode = response.daily.weatherCode[index], temperature2mMax = response.daily.temperature2mMax[index], temperature2mMin = response.daily.temperature2mMin[index]))
+                }
+                Log.d("ViewModel", "Saving to list")
+                println(list)
+                _weatherList.value = list
             } catch (e: Exception) {
                 _weatherState.value = WeatherState.Error(e.message ?: "Unknown Error")
             }

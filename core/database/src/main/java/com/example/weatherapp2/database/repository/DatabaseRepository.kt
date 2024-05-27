@@ -2,8 +2,10 @@ package com.example.weatherapp2.database.repository
 
 import com.example.weatherapp2.database.model.WeatherPreferences
 import com.example.weatherapp2.database.model.WeatherPreferencesDao
+import dagger.Provides
+import javax.inject.Inject
 
-class WeatherDatabaseRepository(
+class WeatherDatabaseRepository @Inject constructor(
     private val weatherPreferencesDao: WeatherPreferencesDao
 ) {
 

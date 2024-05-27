@@ -13,5 +13,5 @@ interface WeatherApiService {
         @Query("timezone") timezone: String,
         @Query("temperature_unit") temperatureUnit: String,
         @Query("daily") daily: String = "weather_code,temperature_2m_max,temperature_2m_min"
-        ) : Call<WeatherResponse>
+        ) : WeatherResponse
 }

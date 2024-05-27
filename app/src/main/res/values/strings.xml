@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp2</string>
+    <string name="weather_code">Weather code: %1$s</string>
+    <string name="temperature_min_max">Temperature : min: %1$s - max: %2$s</string>
+    <string name="go_back">Go back</string>
+    <string name="error_getting_data">Error getting data</string>
 </resources>
