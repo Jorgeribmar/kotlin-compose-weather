@@ -1,4 +1,4 @@
-package com.example.weatherapp2.ui
+package com.example.weather_detail.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,9 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.weatherapp2.R
+import com.example.weather_detail.R
 import com.example.weatherapp2.common.viewmodel.WeatherState
 import com.example.weatherapp2.common.viewmodel.WeatherViewModel
 import com.example.weatherapp2.network.model.Weather

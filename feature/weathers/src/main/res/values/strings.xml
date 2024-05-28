@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WeatherApp2</string>
+    <string name="error_getting_data">Error getting data</string>
+</resources>

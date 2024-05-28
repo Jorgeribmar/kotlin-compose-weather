@@ -76,8 +76,10 @@ dependencies {
     implementation(libs.androidx.material3)
     //Dagger Hilt Library
     implementation(libs.hilt.android.v249)
-    implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
+
 
     //Retrofit Library
     implementation(libs.converter.gson)
@@ -90,7 +92,6 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:common"))
     implementation(project(":core:common-ui"))
-    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
