@@ -1,4 +1,4 @@
-package com.lokhate.ui
+package com.example.weatherapp2.common_ui
 
 import org.junit.Test
 
