@@ -1,5 +1,6 @@
-package com.example.weatherapp2.network
+package com.example.weatherapp2.network.di
 
+import com.example.weatherapp2.network.WeatherApiService
 import com.example.weatherapp2.network.repository.WeatherNetworkRepository
 import dagger.Module
 import dagger.Provides

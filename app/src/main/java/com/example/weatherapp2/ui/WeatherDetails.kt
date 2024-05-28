@@ -25,44 +25,30 @@ import com.example.weatherapp2.network.model.Weather
 
 @Composable
 fun WeatherDetails( viewModel: WeatherViewModel,navController: NavController, weatherId: String, modifier: Modifier = Modifier ) {
-    val weatherState by viewModel.weatherState.collectAsState()
+    val weatherList by viewModel.weatherList.collectAsState()
 
-    when (weatherState) {
-        is WeatherState.Loading -> {
-            CircularProgressIndicator()
-        }
+    if (weatherList.isEmpty()) {
+        Text(text = stringResource(R.string.error_no_weather_list))
+    } else {
+        val id = weatherId.toInt()
+        val weather = weatherList[id]
 
-        is WeatherState.Error -> {
-            Text(text = "Error")
-        }
-
-        is WeatherState.Success -> {
-            val data = (weatherState as WeatherState.Success).data
-            val id = weatherId.toInt()
-            val weather = Weather(
-                time = data.daily.time[id],
-                weatherCode = data.daily.weatherCode[id],
-                temperature2mMax = data.daily.temperature2mMax[id],
-                temperature2mMin = data.daily.temperature2mMin[id]
-            )
-
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(vertical = 64.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(text = weather.time, fontSize = 32.sp, textAlign = TextAlign.Center)
-                Text(text = stringResource(R.string.weather_code, weather.weatherCode))
-                Text(text = stringResource(
-                    R.string.temperature_min_max,
-                    weather.temperature2mMin,
-                    weather.temperature2mMax
-                ), modifier = Modifier.padding(bottom = 32.dp))
-                Button(onClick = { navController.navigateUp() }) {
-                    Text(text = stringResource(R.string.go_back))
-                }
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(vertical = 64.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(text = weather.time, fontSize = 32.sp, textAlign = TextAlign.Center)
+            Text(text = stringResource(R.string.weather_code, weather.weatherCode))
+            Text(text = stringResource(
+                R.string.temperature_min_max,
+                weather.temperature2mMin,
+                weather.temperature2mMax
+            ), modifier = Modifier.padding(bottom = 32.dp))
+            Button(onClick = { navController.navigateUp() }) {
+                Text(text = stringResource(R.string.go_back))
             }
         }
     }

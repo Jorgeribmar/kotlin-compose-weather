@@ -1,7 +1,8 @@
-package com.example.weatherapp2.database
+package com.example.weatherapp2.database.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.weatherapp2.database.AppDatabase
 import com.example.weatherapp2.database.model.WeatherPreferencesDao
 import dagger.Module
 import dagger.Provides

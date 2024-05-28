@@ -56,39 +56,31 @@ fun WeatherScreen(
 
         is WeatherState.Success -> {
             Log.d("WeathetScreen", "Success")
-            val data = (weatherState as WeatherState.Success).data
-            val weatherList: MutableList<Weather> = mutableListOf()
-            data.daily.time.forEachIndexed { index, value ->
-                weatherList.add(
-                    Weather(
-                        time = value,
-                        weatherCode = data.daily.weatherCode[index],
-                        temperature2mMax = data.daily.temperature2mMax[index],
-                        temperature2mMin = data.daily.temperature2mMin[index]
-                    )
-                )
-            }
-            when (weatherPrefState) {
-                is WeatherPrefState.Success -> {
-                    val tempUnit = (weatherPrefState as WeatherPrefState.Success).data
-                    Column(
-                        modifier = Modifier.padding(64.dp)
-                    ) {
-                        Log.d("WeatherScreen", "Default value from state : $tempUnit")
-                        WeatherPreferenceToggle(defaultValue = tempUnit) {
-                            Log.d("WeatherScreen", "Switch changed : $it - Temp Uni: $tempUnit")
+            val weatherList: List<Weather> = viewModel.weatherList.collectAsState().value
+            if (weatherList.isEmpty()) {
+                Text(text = stringResource(id = R.string.error_no_weather_list))
+            } else {
+                when (weatherPrefState) {
+                    is WeatherPrefState.Success -> {
+                        val tempUnit = (weatherPrefState as WeatherPrefState.Success).data
+                        Column(
+                            modifier = Modifier.padding(64.dp)
+                        ) {
+                            Log.d("WeatherScreen", "Default value from state : $tempUnit")
+                            WeatherPreferenceToggle(defaultValue = tempUnit) {
+                                Log.d("WeatherScreen", "Switch changed : $it - Temp Uni: $tempUnit")
 
-                            val pref = if (it) "celsius" else "fahrenheit"
-                            viewModel.setWeatherPref(pref)
-                            viewModel.fetchWeather(lat, lon, timezone, pref)
+                                val pref = if (it) "celsius" else "fahrenheit"
+                                viewModel.setWeatherPref(pref)
+                                viewModel.fetchWeather(lat, lon, timezone, pref)
+                            }
+                            WeatherList(navController = navController, list = weatherList)
                         }
-                        WeatherList(navController = navController, list = weatherList)
                     }
-                }
 
-                else -> Text(text = stringResource(R.string.error_getting_data))
+                    else -> Text(text = stringResource(R.string.error_getting_data))
+                }
             }
-            println(data)
         }
 
         is WeatherState.Error -> {

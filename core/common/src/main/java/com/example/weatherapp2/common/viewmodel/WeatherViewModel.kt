@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp2.database.repository.WeatherDatabaseRepository
 import com.example.weatherapp2.network.model.Weather
 import com.example.weatherapp2.network.model.WeatherResponse
+import com.example.weatherapp2.network.model.convertWeatherResponseToWeather
 import com.example.weatherapp2.network.repository.WeatherNetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -62,13 +63,7 @@ class WeatherViewModel @Inject constructor(
                 val response =
                     weatherNetworkRepository.getWeatherDataForecast(lat, lon, timezone, units)
                 _weatherState.value = WeatherState.Success(response)
-                val list: MutableList<Weather> = mutableListOf()
-                response.daily.time.forEachIndexed { index, value ->
-                    list.add(Weather(time = value, weatherCode = response.daily.weatherCode[index], temperature2mMax = response.daily.temperature2mMax[index], temperature2mMin = response.daily.temperature2mMin[index]))
-                }
-                Log.d("ViewModel", "Saving to list")
-                println(list)
-                _weatherList.value = list
+                _weatherList.value = convertWeatherResponseToWeather(response)
             } catch (e: Exception) {
                 _weatherState.value = WeatherState.Error(e.message ?: "Unknown Error")
             }
