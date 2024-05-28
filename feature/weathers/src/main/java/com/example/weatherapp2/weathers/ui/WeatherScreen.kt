@@ -1,4 +1,4 @@
-package com.example.weatherapp2.ui
+package com.example.weatherapp2.weathers.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.weatherapp2.R
 import com.example.weatherapp2.common.viewmodel.WeatherPrefState
 import com.example.weatherapp2.common.viewmodel.WeatherState
 import com.example.weatherapp2.common.viewmodel.WeatherViewModel
 import com.example.weatherapp2.network.model.Weather
+import com.example.weatherapp2.weathers.R
 
 @Composable
 fun WeatherScreen(

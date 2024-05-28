@@ -1,4 +1,4 @@
-package com.example.weatherapp2.ui.navigation
+package com.example.weatherapp2.common_ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,8 +7,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.weatherapp2.common.viewmodel.WeatherViewModel
-import com.example.weatherapp2.ui.WeatherDetails
-import com.example.weatherapp2.ui.WeatherScreen
+import com.example.weather_detail.ui.WeatherDetails
+import com.example.weatherapp2.weathers.ui.WeatherScreen
 
 @Composable
 fun NavGraph(
@@ -30,7 +30,11 @@ fun NavGraph(
         }
         composable(Screen.WeatherDetail.route) { backStackEntry ->
             val weatherId = backStackEntry.arguments?.getString("weatherId") ?: "0"
-            WeatherDetails(viewModel = weatherViewModel, navController = navController, weatherId)
+            WeatherDetails(
+                viewModel = weatherViewModel,
+                navController = navController,
+                weatherId
+            )
         }
     }
 }
